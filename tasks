@@ -3,11 +3,23 @@
 <?php
 
 use Symfony\Component\Console\Application;
+use PDO;
 
 require 'vendor/autoload.php';
 
 $app = new Application('Task App', '1.0');
 
-$app->add(new Acme\ShowCommand);
+try {
+    $pdo = new PDO('sqlite:db.sqllite');
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch(Exception $e) {
+    echo 'Could not connect to database';
+    exit(1);
+}
+
+$dbAdapter = new Acme\DatabaseAdapter($pdo);
+
+$app->add(new Acme\ShowCommand($dbAdapter));
 
 $app->run();

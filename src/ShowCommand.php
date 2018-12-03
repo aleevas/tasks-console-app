@@ -24,7 +24,7 @@ class ShowCommand extends Command {
     public function configure () {
 
         $this->setName('show')
-             ->setDescription('Show all tasks,');
+             ->setDescription('Show all tasks.');
             //  ->addArgument('name', InputArgument::REQUIRED, 'Please enter your name')
             //  ->addOption('greeting', null, InputOption::VALUE_OPTIONAL, 'Can override the default greeting', 'Glad to see you');
 
